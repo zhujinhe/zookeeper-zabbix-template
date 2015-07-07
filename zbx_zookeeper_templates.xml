@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2015-02-10T07:12:44Z</date>
+    <date>2015-07-07T01:51:15Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -813,21 +813,17 @@
     </templates>
     <triggers>
         <trigger>
-<<<<<<< HEAD
-            <expression>{Template ZooKeeper Info:getZookeeperInfo.py[&quot;-h&quot;,&quot;{HOST.CONN}&quot;,&quot;-p&quot;,&quot;{$ZOOKEEPERPORT}&quot;,&quot;-c&quot;,&quot;ruok&quot;,&quot;-k&quot;,&quot;state&quot;].last()}&lt;&gt;0</expression>
-=======
-            <expression>{Template ZooKeeper Info:getZookeeperInfo.py[&quot;-h&quot;,&quot;{HOST.CONN}&quot;,&quot;-p&quot;,&quot;{$ZOOKEEPERPORT}&quot;,&quot;-c&quot;,&quot;ruok&quot;,&quot;-k&quot;,&quot;state&quot;].last()}&lt;&gt;1</expression>
->>>>>>> 5a01350508f1631166692fcfd3f5781b179a5c35
-            <name>Zookeeper does not respond</name>
+            <expression>{Template ZooKeeper Info:getZookeeperInfo.py[&quot;-h&quot;,&quot;{HOST.CONN}&quot;,&quot;-p&quot;,&quot;{$ZOOKEEPERPORT}&quot;,&quot;-c&quot;,&quot;ruok&quot;,&quot;-k&quot;,&quot;state&quot;].last(#3)}=0</expression>
+            <name>The Zookeeper is not responding in last 3 times.</name>
             <url/>
-            <status>0</status>
+            <status>1</status>
             <priority>4</priority>
             <description/>
             <type>0</type>
             <dependencies/>
         </trigger>
         <trigger>
-            <expression>{Template ZooKeeper Info:net.tcp.service[tcp,,{$ZOOKEEPERPORT}].count(#3,0,&quot;eq&quot;)}=3</expression>
+            <expression>{Template ZooKeeper Info:net.tcp.service[tcp,,{$ZOOKEEPERPORT}].count(#2,0,&quot;eq&quot;)}=2</expression>
             <name>ZooKeeperport {$ZOOKEEPERPORT} is not running</name>
             <url/>
             <status>0</status>
@@ -837,4 +833,50 @@
             <dependencies/>
         </trigger>
     </triggers>
+    <graphs>
+        <graph>
+            <name>ZooKeeper Packets</name>
+            <width>900</width>
+            <height>200</height>
+            <yaxismin>0.0000</yaxismin>
+            <yaxismax>100.0000</yaxismax>
+            <show_work_period>1</show_work_period>
+            <show_triggers>1</show_triggers>
+            <type>0</type>
+            <show_legend>1</show_legend>
+            <show_3d>0</show_3d>
+            <percent_left>0.0000</percent_left>
+            <percent_right>0.0000</percent_right>
+            <ymin_type_1>0</ymin_type_1>
+            <ymax_type_1>0</ymax_type_1>
+            <ymin_item_1>0</ymin_item_1>
+            <ymax_item_1>0</ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>0</sortorder>
+                    <drawtype>1</drawtype>
+                    <color>99FF99</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template ZooKeeper Info</host>
+                        <key>getZookeeperInfo.py[&quot;-h&quot;,&quot;{HOST.CONN}&quot;,&quot;-p&quot;,&quot;{$ZOOKEEPERPORT}&quot;,&quot;-c&quot;,&quot;mntr&quot;,&quot;-k&quot;,&quot;zk_packets_received&quot;]</key>
+                    </item>
+                </graph_item>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>2</drawtype>
+                    <color>C80000</color>
+                    <yaxisside>0</yaxisside>
+                    <calc_fnc>2</calc_fnc>
+                    <type>0</type>
+                    <item>
+                        <host>Template ZooKeeper Info</host>
+                        <key>getZookeeperInfo.py[&quot;-h&quot;,&quot;{HOST.CONN}&quot;,&quot;-p&quot;,&quot;{$ZOOKEEPERPORT}&quot;,&quot;-c&quot;,&quot;mntr&quot;,&quot;-k&quot;,&quot;zk_packets_sent&quot;]</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
 </zabbix_export>

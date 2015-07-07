@@ -64,10 +64,10 @@ class ZooKeeperCommands(object):
         elif self._zkCommand == 'ruok':
 
             if self._value_raw == 'imok':
-                self._value['state'] = 0
+                self._value['state'] = 1
 #                print " server is running in a non-error state."
             else:
-                self._value['state'] = 1
+                self._value['state'] = 0
 #                print "ruok command does not respond at all"
         else:
             "zkCommand is wrong"
